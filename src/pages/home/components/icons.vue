@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       swiperOption: {
-        autoPlay: true
+        autoplay: false
       }
     }
   },
