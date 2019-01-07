@@ -2,7 +2,7 @@
     <div>
         <div class="title">热销推荐</div>
         <ul>
-            <li class="item border-bottom" v-for="item in recommendList" :key="item.id">
+            <li class="item border-bottom" v-for="item in list" :key="item.id">
                 <div class="item-img-wrapper">
                     <img class="item-img" :src="item.imgUrl" alt="">
                 </div>
@@ -17,32 +17,11 @@
 <script>
 export default {
   name: 'HomeWeekend',
+  props: {
+    list: Array
+  },
   data() {
-    return {
-      recommendList: [
-        {
-          id: 1,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1901/17/d1821879b04ca602.jpg_750x200_115ccc5d.jpg',
-          title: '水奥雪世界',
-          desc: '水奥雪世界水奥雪世界'
-        },
-        {
-          id: 2,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1901/17/d1821879b04ca602.jpg_750x200_115ccc5d.jpg',
-          title: '水奥雪世界',
-          desc: '水奥雪世界水奥雪世界'
-        },
-        {
-          id: 3,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1901/17/d1821879b04ca602.jpg_750x200_115ccc5d.jpg',
-          title: '水奥雪世界',
-          desc: '水奥雪世界水奥雪世界'
-        }
-      ]
-    }
+    return {}
   }
 }
 </script>
@@ -50,18 +29,18 @@ export default {
 @import '~styles/mixins.styl';
 
 .title {
-    margin-top: 0.2rem;
     background: #eee;
     line-height: 0.8rem;
     text-indent: 0.2rem;
 }
 
 .item {
-    .item-img-wrapper{
-        height:0;
-        overflow:hidden;
-        padding-bottom:26.9%;
+    .item-img-wrapper {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 37.09%;
     }
+
     .item-img {
         width: 100%;
     }

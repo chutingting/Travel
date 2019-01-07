@@ -15,74 +15,21 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data() {
     return {
       swiperOption: {
-        pagination: '.swiper-pagination'
-      },
-      iconList: [
-        {
-          id: 1,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc: '景点门票'
-        },
-        {
-          id: 2,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-          desc: '一日游'
-        },
-        {
-          id: 3,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-          desc: '北京必游'
-        },
-        {
-          id: 4,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-          desc: '帝都范儿'
-        },
-        {
-          id: 5,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png',
-          desc: '动植物园'
-        },
-        {
-          id: 6,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/6c/9e54a8540fee0102.png',
-          desc: '故宫'
-        },
-        {
-          id: 7,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-          desc: '名胜古迹'
-        },
-        {
-          id: 8,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/fc/b10a6b2e4f0fe102.png',
-          desc: '北京滑雪'
-        },
-        {
-          id: 9,
-          imgUrl:
-            'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc: '景点'
-        }
-      ]
+        autoPlay: true
+      }
     }
   },
   computed: {
     pages() {
       const pages = []
       // 变为二维数组 自动构建页码
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
@@ -104,6 +51,8 @@ export default {
 }
 
 .icons {
+  margin-top: 0.1rem;
+
   .icon {
     overflow: hidden;
     float: left;
