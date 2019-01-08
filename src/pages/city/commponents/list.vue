@@ -1,24 +1,42 @@
 <template>
-    <div class="list">
-        <div class="area">
-            <div class="title border-topbottom">当前城市</div>
-            <div class="button-list">
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
+    <div class="list" ref="wrapper">
+        <div>
+            <div class="area">
+                <div class="title border-topbottom">当前城市</div>
+                <div class="button-list">
+                    <div class="button-wrapper">
+                        <div class="button">北京</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="area">
-            <div class="title border-topbottom">热门城市</div>
-        </div>
-        <div class="area">
-            <div class="title border-topbottom">A</div>
+            <div class="area">
+                <div class="title border-topbottom">热门城市</div>
+                <div class="button-list">
+                    <div class="button-wrapper" v-for="item in hot" :key="item.id">
+                        <div class="button">{{item.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="area" v-for="(item,key) in cities" :key='key'>
+                <div class="title border-topbottom">{{key}}</div>
+                <div class="item-list">
+                    <div class="item border-bottom" v-for="innerItem in item" :key="innerItem.id">{{innerItem.name}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
+import Bscroll from 'better-scroll'
 export default {
-  name: 'CityList'
+  name: 'CityList',
+  props: {
+    cities: Object,
+    hot: Array
+  },
+  mounted() {
+    this.scroll = new Bscroll(this.$refs.wrapper)
+  }
 }
 </script>
 <style scoped lang='stylus'>
@@ -34,16 +52,32 @@ export default {
     }
 }
 
+.border-bottom {
+    &:before {
+        border-color: #ccc;
+    }
+}
+
+.list {
+    position: absolute;
+    top: 1.58rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
 .title {
-    line-height: 0.44rem;
+    line-height: 0.54rem;
     background: #eee;
     font-size: 0.26rem;
     padding-left: 0.2rem;
 }
 
 .button-list {
-    padding: 0.1rem;
-    overflow:hidden
+    padding: 0.1rem 0.6rem 0.1rem 0.1rem;
+    overflow: hidden;
+
     .button-wrapper {
         float: left;
         width: 33.33%;
@@ -51,9 +85,19 @@ export default {
         .button {
             margin: 0.1rem;
             text-align: center;
-            border:.02rem solid #ccc;
-            padding:.1rem 0
+            border: 0.02rem solid #ccc;
+            padding: 0.1rem 0;
+            border-radius: 0.06rem;
         }
     }
+}
+
+.item-list {
+    .item {
+        padding-left: 0.2rem;
+        color: #666;
+    }
+
+    line-height: 0.76rem;
 }
 </style>
