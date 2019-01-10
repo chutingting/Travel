@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <city-header></city-header>
-        <city-search></city-search>
-        <city-list :cities='cities' :hot='hotCities'></city-list>
-        <city-alphabet :cities='cities'></city-alphabet>
-    </div>
+  <div>
+    <city-header></city-header>
+    <city-search  :cities='cities'></city-search>
+    <city-list :cities='cities' :hot='hotCities' :letter='letter'></city-list>
+    <city-alphabet :cities='cities' @change="handleLetterClick"></city-alphabet>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       cities: {},
-      hotCities: []
+      hotCities: [],
+      letter: ''
     }
   },
   methods: {
@@ -35,6 +36,10 @@ export default {
         this.cities = res.data.cities
         this.hotCities = res.data.hotCities
       }
+    },
+    // 获取点击字母传递给兄弟组件 list.vue
+    handleLetterClick(d) {
+      this.letter = d
     }
   },
   mounted() {

@@ -7,6 +7,7 @@
             <span class="icon">&#xe632;</span>输入城市/景点/游玩主题</div>
         <router-link to="/city">
             <div class="header-right">{{this.city}}
+                <!-- {{this.$store.state.city}} -->
                 <span class="icon icon-jiantou"></span>
             </div>
         </router-link>
@@ -14,10 +15,14 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  // 把vuex中的数据city映射到计算属性里
+  computed: {
+    ...mapState(['city']),
+    // 获取getter 页面中可以直接使用 this.doubleCity
+    ...mapGetters(['doubleCity'])
   }
 }
 </script>
@@ -54,10 +59,11 @@ export default {
     }
 
     .header-right {
-        width: 1.24rem;
+        min-width: 1.04rem;
+        padding: 0 0.1rem;
         float: right;
         text-align: center;
-        color:#fff;
+        color: #fff;
     }
 }
 </style>

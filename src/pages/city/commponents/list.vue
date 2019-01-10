@@ -5,22 +5,24 @@
                 <div class="title border-topbottom">当前城市</div>
                 <div class="button-list">
                     <div class="button-wrapper">
-                        <div class="button">北京</div>
+                        <div class="button">{{this.currentCity}}
+                            <!-- {{this.$store.state.city}} -->
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="title border-topbottom">热门城市</div>
                 <div class="button-list">
-                    <div class="button-wrapper" v-for="item in hot" :key="item.id">
+                    <div class="button-wrapper" v-for="item in hot" :key="item.id" @click="handleCityClick(item.name)">
                         <div class="button">{{item.name}}</div>
                     </div>
                 </div>
             </div>
-            <div class="area" v-for="(item,key) in cities" :key='key'>
+            <div class="area" v-for="(item,key) in cities" :key='key' :ref="key">
                 <div class="title border-topbottom">{{key}}</div>
                 <div class="item-list">
-                    <div class="item border-bottom" v-for="innerItem in item" :key="innerItem.id">{{innerItem.name}}</div>
+                    <div class="item border-bottom" v-for="innerItem in item" :key="innerItem.id" @click="handleCityClick(innerItem.name)">{{innerItem.name}}</div>
                 </div>
             </div>
         </div>
@@ -28,14 +30,45 @@
 </template>
 <script>
 import Bscroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'CityList',
   props: {
     cities: Object,
-    hot: Array
+    hot: Array,
+    letter: String
+  },
+  computed: {
+    ...mapState({
+      currentCity: 'city'
+    })
+  },
+  data() {
+    return {
+      scroll: ''
+    }
+  },
+  methods: {
+    handleCityClick(city) {
+      // 改变store中的数据
+      // this.$store.dispatch('changeCity', city) 或者 this.$store.commit('changeCity', city)
+      // 加上 ...mapMutations(['changeCity'])可以直接写成
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
   },
   mounted() {
     this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  // 监听字母的变化 展示不同的区域
+  watch: {
+    letter() {
+      if (this.letter) {
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
   }
 }
 </script>
