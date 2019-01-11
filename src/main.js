@@ -6,6 +6,9 @@ import router from './router'
 /* 解决移动端 300毫秒 点击延迟问题 */
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+/* 解决移动端白屏问题  让浏览器支持promise */
+import 'babel-polyfill'
+
 import store from './store'
 import 'styles/reset.css'
 /* 解决1像素问题 */
